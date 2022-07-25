@@ -8,35 +8,24 @@
           class="fa fa-mars iconmargin"
           style="color: #333"
         ></i>南通掘金</div>
+
       <div class="mid-grid">
-        <div class="nav">
-          1111
+        <div class="nav" v-for="(content,index) in contents" :key="index">
+          {{content}}
         </div>
-        <div class="nav">
-          1111
-        </div>
-        <div class="nav">
-          1111
-        </div>
-        <div class="nav">
-          1111
-        </div>
-        <div class="nav">
-          1111
-        </div>
-        <div class="nav">
-          1111
-        </div>
+
         <div class="search">
           <el-input
             placeholder="搜索稀土掘金"
             suffix-icon="Search"
           ></el-input>
         </div>
+
         <div class="button">
           <el-button type="primary">创作者中心</el-button>
         </div>
       </div>
+
       <div class="right-gird">
         <i
           class="fa fa-vimeo-square"
@@ -68,6 +57,11 @@ export default {
     Search,
     NavList
   },
+  data(){
+    return {
+      contents:[1111,1111,1111,1111,1111,1111]
+    }
+  }
 };
 </script>
 
