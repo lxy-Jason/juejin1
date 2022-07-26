@@ -11,7 +11,7 @@
 
 <script>
 import List from "@/views/Home/component/List.vue";
-
+//test
 export default {
   components: { List },
   data() {
