@@ -17,73 +17,38 @@ export default {
   data() {
     return {
       ListDatas: [
-        {
-          name: "小智",
-          time: new Date().toLocaleString(),
-          title: "标题",
-          content: "内容",
-        },
-        {
-          name: "小智",
-          time: new Date().toLocaleString(),
-          title: "标题",
-          content: "内容",
-        },
-        {
-          name: "小智",
-          time: new Date().toLocaleString(),
-          title: "标题",
-          content: "内容",
-        },
-        {
-          name: "小智",
-          time: new Date().toLocaleString(),
-          title: "标题",
-          content: "内容",
-        },
-        {
-          name: "小智",
-          time: new Date().toLocaleString(),
-          title: "标题",
-          content: "内容",
-        },
-        {
-          name: "小智",
-          time: new Date().toLocaleString(),
-          title: "标题",
-          content: "内容",
-        },
-        {
-          name: "小智",
-          time: new Date().toLocaleString(),
-          title: "标题",
-          content: "内容",
-        },
-        {
-          name: "小智",
-          time: new Date().toLocaleString(),
-          title: "标题",
-          content: "内容",
-        },
-        {
-          name: "小智",
-          time: new Date().toLocaleString(),
-          title: "标题",
-          content: "内容",
-        },
+        
       ],
     };
   },
-  created() {
+  mounted(){
+        (async () => {
+
+          const request = await fetch('http://182.61.29.159:3334/article/findAll?page=1&pageSize=5')
+          if(request.ok){
+            let {data} =await request.json();
+            console.log(this.ListDatas)
+            this.ListDatas = [...data,...data];
+          }else{
+            console.log(request.status);
+          }
+        })()
+    
+
     document.addEventListener("scroll", () => {
       const List = this.$refs.List.at(-1).$el;
-      // console.log(List);
       if (List.getBoundingClientRect().bottom - document.documentElement.clientHeight <= 0) {
-        // console.log(
-        //   List.getBoundingClientRect().bottom -
-        //     document.documentElement.clientHeight
-        // );
-        this.ListDatas = [...this.ListDatas, ...this.ListDatas];
+        
+        (async () => {
+
+          const request = await fetch('http://182.61.29.159:3334/article/findAll?page=1&pageSize=5')
+          if(request.ok){
+            let {data} =await request.json();
+            this.ListDatas = [...this.ListDatas,...data];
+          }else{
+            console.log(request.status);
+          }
+        })()
       }
     });
   },
