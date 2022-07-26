@@ -12,6 +12,7 @@
 <script>
 import List from "@/views/Home/component/List.vue";
 //test
+//1111
 export default {
   components: { List },
   data() {
