@@ -32,14 +32,6 @@ export default {
       picture:String,
     },
   },
-  data() {
-    return {
-      name: "曾思程",
-      time: "时间",
-      title: "标题",
-      content: "内容。。。。。",
-    };
-  },
 };
 </script>
 <style lang="scss" scoped>
