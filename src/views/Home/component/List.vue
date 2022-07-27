@@ -8,30 +8,44 @@
       <span class="item-name2">{{ data.category }}</span>
     </div>
 
-    <div class="item-box">
+    <div class="item-box" @click="jump">
       <div>
         <div class="item-title">{{ data.title }}</div>
         <div class="item-content">{{ data.describe }}</div>
       </div>
     </div>
 
-    <div class="picture" v-if="data.picture" :style="{backgroundImage:`url(${data.picture})`}"></div>
+    <div
+      class="picture"
+      v-if="data.picture"
+      :style="{ backgroundImage: `url(${data.picture})` }"
+    ></div>
   </div>
 </template>
 
 <script>
+import { useRouter } from 'vue-router';
 export default {
   props: {
     data: {
-      id:String,
+      id: String,
       author: String,
       createTime: Object,
-      category:String,
+      category: String,
       title: String,
       describe: String,
-      picture:String,
+      picture: String,
     },
   },
+  setup() {
+    const router = useRouter()
+    function jump(){
+      router.push('/article')
+    }
+    return {
+      jump
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>
@@ -41,10 +55,10 @@ export default {
     height: 70px;
     width: 70px;
     right: 10px;
-    top:10px;
+    top: 10px;
     background-color: black;
     position: absolute;
-    background-size:cover;
+    background-size: cover;
   }
   .item-name {
     margin-left: 20px;

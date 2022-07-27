@@ -1,16 +1,10 @@
 <template>
-<Home></Home>
+   <router-view/>
 </template>
 
 <script>
-import Header from "./components/header/Header.vue";
-import NavList from "./components/header/NavList.vue";
-import Home from "./views/Home/index.vue";
 export default {
   name: "App",
-  components:{
-    Home
-  }
 };
 </script>
 <style lang="scss">
