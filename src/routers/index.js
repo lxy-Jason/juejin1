@@ -3,9 +3,14 @@ export const router = createRouter({
   history: createWebHashHistory(),
   routes: [
     {
-      path: '/home',
+      path: '/',
       name: '/home',
       component: () => import('@/views/Home/index.vue'),
+    },
+    {
+      path: '/',
+      name: '/article',
+      component: () => import('@/views/Article/index.vue'),
     }
   ],
 })
