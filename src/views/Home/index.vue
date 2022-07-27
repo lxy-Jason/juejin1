@@ -1,8 +1,8 @@
 <template>
-<Header></Header>
- <out-page>
-<template #main>
-    <Lists/>
+  <Header></Header>
+  <out-page>
+    <template #main>
+      <Lists />
     </template>
   </out-page>
 </template>
