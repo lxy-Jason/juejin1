@@ -1,6 +1,5 @@
 <template>
-<Header></Header>
-<Article></Article>
+<Home></Home>
 </template>
 
 <script setup>

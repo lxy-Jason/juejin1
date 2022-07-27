@@ -44,6 +44,7 @@
     </div>
     <div>
       <div class="divide"></div>
+      <NavList></NavList>
     </div>
   </div>
 </template>
