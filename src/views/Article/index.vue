@@ -13,7 +13,8 @@
 </template>
 
 <script setup>
-
+import CommentOutPage from "@/components/outPage/CommentOutPage.vue"
+import DetailContent from "@/components/Article/DetailContent.vue"
 </script>
 <style lang="scss" scoped>
 .container {
