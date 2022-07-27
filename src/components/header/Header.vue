@@ -44,13 +44,14 @@
     </div>
     <div>
       <div class="divide"></div>
-      <nav-list></nav-list>
+      <NavList></NavList>
     </div>
   </div>
 </template>
 
 <script>
 import NavList from "@/components/header/NavList.vue";
+//还是先用着吧，有ui错误，目前思路是切换页面再隐蔽navlist
 import { Search } from "@element-plus/icons";
 export default {
   components: {

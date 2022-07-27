@@ -2,7 +2,7 @@
   <div>
     <comment-out-page>
       <template #main>
-        <div>
+        <div class="container">
           <detail-content></detail-content>
           <el-divider></el-divider>
         </div>
