@@ -1,17 +1,14 @@
 <template>
-<Home></Home>
+<Header></Header>
+<Article></Article>
 </template>
 
-<script>
+<script setup>
 import Header from "./components/header/Header.vue";
 import NavList from "./components/header/NavList.vue";
 import Home from "./views/Home/index.vue";
-export default {
-  name: "App",
-  components:{
-    Home
-  }
-};
+import Article from "./views/Article"
+//详情页演示，有需要可以自行调换
 </script>
 <style lang="scss">
 /* 改变主题色变量 */
