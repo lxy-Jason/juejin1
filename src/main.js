@@ -4,9 +4,10 @@ import ElementPlus from "element-plus";
 import "element-plus/dist/index.css";
 import locale from "element-plus/lib/locale/lang/zh-cn";
 import "font-awesome/css/font-awesome.min.css";
+import {router} from "@/routers/index"
 import * as Icons from "@element-plus/icons-vue";
 const app = createApp(App);
 for (let i in Icons) {
   app.component(i, Icons[i]);
 }
-app.use(ElementPlus, { locale }).mount("#app");
+app.use(router).use(ElementPlus, { locale }).mount("#app");
