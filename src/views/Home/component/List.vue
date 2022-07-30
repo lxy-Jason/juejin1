@@ -13,6 +13,15 @@
         <div class="item-title">{{ data.title }}</div>
         <div class="item-content">{{ data.describe }}</div>
       </div>
+      <el-row class="List-icons">
+        <el-button plain v-for="(iconData, index) in ListIconData" :key="index"  
+        @mouseenter="(e)=>{iconData.mouseEnter(e,iconData)}"
+        @mouseleave="(e)=>{iconData.mouseLeave(e,iconData)}"
+        @click="(e) => {iconData.clickHandle(e,iconData)}">
+          <img :src="iconData.icon" /> 
+          {{iconData.value}}
+        </el-button>
+      </el-row>
     </div>
 
     <div
@@ -24,7 +33,8 @@
 </template>
 
 <script>
-import { useRouter } from 'vue-router';
+import { useRouter } from "vue-router";
+import { ref } from "vue";
 export default {
   props: {
     data: {
@@ -35,17 +45,67 @@ export default {
       title: String,
       describe: String,
       picture: String,
+      watch:Number,
+      like:Number,
+      comment:Number,
     },
   },
-  setup() {
-    const router = useRouter()
-    function jump(){
-      router.push('/article')
+  setup({ data }) {
+    const router = useRouter();
+    function jump() {
+      router.push("/article");
     }
+
+    const ListIconData = ref([
+      {
+        icon: require("@/assets/view.png"),
+        value:data.watch,
+        mouseLeave:(e,item)=>{},
+        mouseEnter:(e,item)=>{},
+        clickHandle:(e,item)=>{}
+      },
+      {
+        icon: require("@/assets/点赞.png"),
+        iconEnter:require("@/assets/点赞 (1).png"),
+        iconleave:require("@/assets/点赞.png"),
+        value:data.like,
+        click:false,
+        mouseLeave:(e,item)=>{
+          if(item.click)return;
+          item.icon = item.iconleave
+        },
+        mouseEnter:(e,item)=>{
+          if(item.click)return;
+          item.icon = item.iconEnter
+        },
+        clickHandle:(e,item)=>{
+          e.stopPropagation();
+          item.icon = item.iconEnter
+          item.click = !item.click;
+          if(item.click) item.value ++;
+          else item.value --;
+        }
+      },
+      {
+        icon: require("@/assets/评论.png"),
+        iconEnter:require("@/assets/评论 (1).png"),
+        iconleave:require("@/assets/评论.png"),
+        value:data.comment,
+        mouseLeave:(e,item)=>{
+          item.icon = item.iconleave
+        },
+        mouseEnter:(e,item)=>{
+          item.icon = item.iconEnter
+        },
+        clickHandle:(e,item)=>{}
+      },
+    ]);
+
     return {
-      jump
-    }
-  }
+      ListIconData,
+      jump,
+    };
+  },
 };
 </script>
 <style lang="scss" scoped>
@@ -76,10 +136,26 @@ export default {
     cursor: pointer;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+
+    // align-items: center;
+    flex-direction: column;
     padding-bottom: 10px;
     padding-top: 10px;
     border-bottom: 1px solid #e5e6eb;
+
+
+    .List-icons {
+      margin-top: 5px;
+      button {
+        border: none;
+        padding: 0;
+        img {
+          padding: 0 5px;
+          width: 25px;
+          object-fit: cover;
+        }
+      }
+    }
 
     .item-title {
       font-weight: 700;

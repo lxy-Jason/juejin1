@@ -22,6 +22,7 @@
     <span class="label">分类：</span>
     <el-button type="info" plain class="jiange">前端</el-button>
     <span class="label">标签：</span>
+
     <el-button type="primary" plain>前端</el-button>
   </div>
 </template>
@@ -63,6 +64,7 @@ export default {
     };
   },
 };
+
 </script>
 <style lang="scss" scoped>
 .author-info {
@@ -70,6 +72,7 @@ export default {
   justify-content: space-between;
   .box-title {
     font-size: 32px;
+
   }
   span {
     display: block;

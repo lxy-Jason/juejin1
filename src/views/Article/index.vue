@@ -18,9 +18,9 @@
 </template>
 
 <script setup>
-import CommentOutPage from "@/components/outPage/CommentOutPage.vue"
-import DetailContent from "@/components/Article/DetailContent.vue"
-import CommentSidebar from "@/components/side/CommentSidebar.vue"
+import CommentOutPage from "@/components/outPage/CommentOutPage.vue";
+import DetailContent from "@/components/Article/DetailContent.vue";
+import CommentSidebar from "@/components/side/CommentSidebar.vue";
 import DirectoryNav from "@/components/Article/directoryNav";
 </script>
 <style lang="scss" scoped>

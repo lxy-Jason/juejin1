@@ -16,17 +16,18 @@ const nav = ref(null);
 const renderNav = (list) => {
   if (!nav.value) return;
   let data = list.value.map((item, index) => {
-    return `<li title="${item.content}"><div data-index="${index}">${item.content}</div></li>`;
+    return `<li title="${item.content}" data-index="${index}"><div data-index="${index}">${item.content}</div></li>`;
   });
   nav.value.innerHTML = data.join("");
 };
 
 const jump = (e)=>{
-  console.log();
+  console.log(e.target);
   let index = e.target.getAttribute('data-index')
   let target = document.getElementById(index)
-  console.log(target);
-  target.scrollIntoView(true)
+  if(target){
+    target.scrollIntoView(true)
+  }
 }
 onMounted(() => {});
 watchEffect(() => {
@@ -68,7 +69,9 @@ a {
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-
+      div{
+        height: 100%;
+      }
       &:hover {
         background: #f7f8fa;
         color: #007fff;

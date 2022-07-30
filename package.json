@@ -19,6 +19,7 @@
     "element-plus": "^2.2.10",
     "font-awesome": "^4.7.0",
     "pinia": "^2.0.17",
+    "@popperjs/core": "^2.11.5",
     "sass": "^1.54.0",
     "vue": "^3.2.13"
   },
