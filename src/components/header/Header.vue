@@ -1,7 +1,9 @@
 <template>
   <div class="container" :class="[hiddenTop ? 'hiddenTop' : 'showTop']">
     <div class="container-header">
-      <div class="left-grid"><i class="fa fa-mars iconmargin" style="color: #333"></i>南通掘金</div>
+      <div class="left-grid">
+        <i class="fa fa-mars iconmargin" style="color: #333"></i>南通掘金
+      </div>
 
       <div class="mid-grid">
         <div class="nav" v-for="(content, index) in contents" :key="index">
@@ -23,7 +25,12 @@
         <el-icon class="message-icon">
           <BellFilled />
         </el-icon>
-        <img class="avatar" src="https://s1.ax1x.com/2022/07/23/jXfLUP.jpg" alt="" />
+
+        <img
+          class="avatar"
+          src="https://s1.ax1x.com/2022/07/23/jXfLUP.jpg"
+          alt=""
+        />
       </div>
     </div>
     <div>
@@ -40,13 +47,14 @@ import { Search } from "@element-plus/icons";
 export default {
   components: {
     Search,
-    NavList
+    NavList,
   },
+
   data() {
     return {
-      contents: [1111, 1111, 1111, 1111, 1111, 1111]
-    }
-  }
+      contents: [1111, 1111, 1111, 1111, 1111, 1111],
+    };
+  },
 };
 </script>
 

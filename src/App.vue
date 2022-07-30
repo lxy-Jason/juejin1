@@ -1,5 +1,5 @@
 <template>
-  <router-view />
+   <router-view/>
 </template>
 
 <script>
@@ -19,7 +19,6 @@ body {
   width: 7px;
   height: 7px;
 }
-
 /* 滚动槽 */
 ::-webkit-scrollbar-track {
   border-radius: 5px;
