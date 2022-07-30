@@ -136,11 +136,13 @@ export default {
     cursor: pointer;
     display: flex;
     justify-content: space-between;
+
     // align-items: center;
     flex-direction: column;
     padding-bottom: 10px;
     padding-top: 10px;
     border-bottom: 1px solid #e5e6eb;
+
 
     .List-icons {
       margin-top: 5px;

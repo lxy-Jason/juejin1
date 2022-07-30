@@ -1,15 +1,14 @@
 <template>
-  <router-view />
+   <router-view/>
 </template>
 
 <script>
-
-
 export default {
   name: "App",
 };
-</script >
-<style lang="scss" >
+</script>
+<style lang="scss">
+
 /* 改变主题色变量 */
 body {
   margin: 0px;
@@ -21,7 +20,6 @@ body {
   width: 7px;
   height: 7px;
 }
-
 /* 滚动槽 */
 ::-webkit-scrollbar-track {
   border-radius: 5px;
