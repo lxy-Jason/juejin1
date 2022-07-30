@@ -1,24 +1,15 @@
 <template>
-  <div
-    class="container"
-    :class="[hiddenTop ? 'hiddenTop' : 'showTop']"
-  >
+  <div class="container" :class="[hiddenTop ? 'hiddenTop' : 'showTop']">
     <div class="container-header">
-      <div class="left-grid"><i
-          class="fa fa-mars iconmargin"
-          style="color: #333"
-        ></i>南通掘金</div>
+      <div class="left-grid"><i class="fa fa-mars iconmargin" style="color: #333"></i>南通掘金</div>
 
       <div class="mid-grid">
-        <div class="nav" v-for="(content,index) in contents" :key="index">
-          {{content}}
+        <div class="nav" v-for="(content, index) in contents" :key="index">
+          {{ content }}
         </div>
 
         <div class="search">
-          <el-input
-            placeholder="搜索稀土掘金"
-            suffix-icon="Search"
-          ></el-input>
+          <el-input placeholder="搜索稀土掘金" suffix-icon="Search"></el-input>
         </div>
 
         <div class="button">
@@ -27,19 +18,12 @@
       </div>
 
       <div class="right-gird">
-        <i
-          class="fa fa-vimeo-square"
-          aria-hidden="true"
-        ></i>
+        <i class="fa fa-vimeo-square" aria-hidden="true"></i>
         <div class="rainbow">SVIP</div>
         <el-icon class="message-icon">
           <BellFilled />
         </el-icon>
-        <img
-          class="avatar"
-          src="https://s1.ax1x.com/2022/07/23/jXfLUP.jpg"
-          alt=""
-        />
+        <img class="avatar" src="https://s1.ax1x.com/2022/07/23/jXfLUP.jpg" alt="" />
       </div>
     </div>
     <div>
@@ -58,9 +42,9 @@ export default {
     Search,
     NavList
   },
-  data(){
+  data() {
     return {
-      contents:[1111,1111,1111,1111,1111,1111]
+      contents: [1111, 1111, 1111, 1111, 1111, 1111]
     }
   }
 };
@@ -88,9 +72,11 @@ export default {
     margin: auto;
     display: flex;
   }
+
   .left-grid {
     font-size: 20px;
     font-family: FZShuTi;
+
     .iconmargin {
       margin-right: 5px;
     }
@@ -108,19 +94,24 @@ export default {
       margin: auto;
       color: #71777c;
     }
+
     .search {
       margin-left: 50px;
     }
+
     .button {
       margin-left: 20px;
     }
+
     :deep(.el-button--small) {
       font-size: 14px;
       padding: 8px 15px;
     }
+
     :deep(.el-button--primary) {
       background: #1e80ff;
     }
+
     :deep(.el-button--primary.is-plain) {
       background: #e8f3ff;
       color: #1e80ff;
@@ -147,9 +138,11 @@ export default {
       font-size: 25px;
       color: rgb(114, 101, 101);
     }
+
     .rainbow {
       font-family: STXingkai;
     }
+
     .avatar {
       width: 30px;
       height: 30px;

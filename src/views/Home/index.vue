@@ -5,7 +5,7 @@
       <Lists />
     </template>
     <template #sidebar>
-      <HomeSiderbar />
+      <HomeSidebar />
     </template>
   </out-page>
 </template>
@@ -16,7 +16,7 @@ import List from "@/views/Home/component/List.vue"
 import OutPage from "@/components/outPage/OutPage.vue"
 import Lists from "@/views/Home/component/Lists.vue"
 import NavList from "@/components/header/NavList.vue"
-import HomeSiderbar from "@/components/side/HomeSiderbar.vue";
+import HomeSidebar from "@/components/side/HomeSidebar.vue";
 </script>
 <style lang="scss" scoped>
 .list-content {
