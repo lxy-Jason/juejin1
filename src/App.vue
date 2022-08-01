@@ -8,7 +8,6 @@ export default {
 };
 </script>
 <style lang="scss">
-
 /* 改变主题色变量 */
 body {
   margin: 0px;

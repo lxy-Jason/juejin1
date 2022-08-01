@@ -4,7 +4,6 @@
     <template #main>
       <Lists />
     </template>
-
     <template #sidebar>
       <HomeSidebar />
     </template>
