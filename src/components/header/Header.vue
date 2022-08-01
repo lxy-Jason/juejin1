@@ -44,15 +44,30 @@
 import NavList from "@/components/header/NavList.vue";
 //还是先用着吧，有ui错误，目前思路是切换页面再隐蔽navlist
 import { Search } from "@element-plus/icons";
+import {created,methods} from "vue"
 export default {
   components: {
     Search,
     NavList,
   },
-
+created() {
+   window.addEventListener('scroll', this.windowScrollListener);//绑定监听事件
+},
+methods:{
+windowScrollListener() {
+  var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+  if (scrollTop >= 300) {
+    this.hiddenTop = true;
+  }
+  if (scrollTop < 300) {
+    this.hiddenTop = false;
+  }
+},
+},
   data() {
     return {
       contents: [1111, 1111, 1111, 1111, 1111, 1111],
+      hiddenTop:false,
     };
   },
 };
