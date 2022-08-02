@@ -32,10 +32,12 @@ export default {
           }else{
             console.log(request.status);
           }
+          this.page ++;
         })()
     
-
+    
     document.addEventListener("scroll", () => {
+      if(!this.$refs.List)return;//防止元素未加载完成触发
       const List = this.$refs.List.at(-1).$el;
       if (List.getBoundingClientRect().bottom - document.documentElement.clientHeight <= 0) {
         
