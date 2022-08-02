@@ -1,37 +1,40 @@
 <template>
   <div class="directory">
     <div class="title">目录</div>
-    <ul ref="nav" class="nav" @click="jump"></ul>
+    <ul ref="nav" class="nav">
+      <li
+        v-for="(i, index) in list"
+        :key="index"
+        title="i.content"
+        @click="jump(index)"
+        :class="activeIndex === index ? 'active' : ''"
+      >
+        <div :style="{ marginLeft: size(i.id) }">{{ i.content }}</div>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script setup>
 const { useListStore } = require("@/store");
-const { onMounted, watchEffect, ref, onBeforeMount, onUnmounted } = require("@vue/runtime-core");
+const {
+  watchEffect,
+  ref,
+  onBeforeMount,
+  onUnmounted,
+} = require("@vue/runtime-core");
 const { storeToRefs } = require("pinia");
 const listArr = useListStore();
 const { list } = storeToRefs(listArr);
-const nav = ref(null);
 
-const renderNav = (list) => {
-  if (!nav.value) return;
-  let maxH = 6;
-  let data = list.value.map((item, index) => {
-    if (item.id < maxH) {
-      maxH = item.id;
-    }
-    return `<li title="${
-      item.content
-    }"  data-index="${index}"><div style="margin-left:${
-      item.id * 5
-    }px" data-index="${index}">${item.content}</div></li>`;
-  });
-
-  nav.value.innerHTML = data.join("");
+let activeIndex = ref(0);
+//动态计算缩进大小
+const size = (num) => {
+  return num * 5 + "px";
 };
-
-const jump = (e) => {
-  let index = e.target.getAttribute("data-index");
+//点击目录跳转
+const jump = (index) => {
+  activeIndex.value = index;
   let target = document.getElementById(index).offsetTop;
   if (target) {
     window.scrollTo({
@@ -39,32 +42,60 @@ const jump = (e) => {
     });
   }
 };
+const hTagHeight = ref([])
+//获取h标签距离页面顶部的距离
+const getHtagHeight = () => {
+  let tag = document.querySelectorAll('.jump-site')
+  let arr = []
+  for(let i = 0; i < tag.length; i++){
+    arr.push(tag[i].offsetTop)
+  }
+  hTagHeight.value = arr
+}
+
 let timer;
-let fun
+let fun;
+let height = ref(0);
+//鼠标滚动获取距离顶部的距离
 const scroll = () => {
-  window.addEventListener("scroll", fun = () => {
-    if (timer) {
-      clearTimeout(timer);
-    }
-    timer = setTimeout(() => {
-      let _scrollTop =
-        window.scrollY ||
-        window.pageYOffset ||
-        document.documentElement.scrollTop;
-      console.log(_scrollTop);
-    },500);
-});
+  window.addEventListener(
+    "scroll",
+    (fun = () => {
+      if (timer) {
+        clearTimeout(timer);
+      }
+      timer = setTimeout(() => {
+        let _scrollTop =
+          window.scrollY ||
+          window.pageYOffset ||
+          document.documentElement.scrollTop;
+        height.value = _scrollTop + 100;
+        getHtagHeight()
+        activeScroll()
+      }, 500);
+    })
+  );
 };
-onMounted(() => {
-});
+//激活样式跟随页面滚动
+const activeScroll = () => {
+  let arr = hTagHeight.value
+  if(arr[0] > height.value ) return
+  else if(arr[arr.length - 1] < height.value){
+    activeIndex.value = arr.length
+  }
+  for(let i = 0; i < arr.length - 1;i++){
+    if(arr[i] < height.value && arr[i+1] > height.value ){
+      return activeIndex.value = i
+    }
+  }
+}
 onBeforeMount(() => {
   scroll();
-})
+});
 onUnmounted(() => {
-  window.removeEventListener('scroll',fun,true)
-})
+  window.removeEventListener("scroll", fun);
+});
 watchEffect(() => {
-  renderNav(list);
 });
 
 //
