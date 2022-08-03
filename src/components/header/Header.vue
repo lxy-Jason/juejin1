@@ -6,7 +6,7 @@
       </div>
 
       <div class="mid-grid">
-        <div class="nav" v-for="(content, index) in contents" :key="index">
+        <div class="nav" v-for="(content, index) in contents" :key="index" @click="routerLink(content)">
           {{ content }}
         </div>
 
@@ -45,6 +45,7 @@ import NavList from "@/components/header/NavList.vue";
 //还是先用着吧，有ui错误，目前思路是切换页面再隐蔽navlist
 import { Search } from "@element-plus/icons";
 import {created,methods} from "vue"
+import { useRouter } from 'vue-router';
 export default {
   components: {
     Search,
@@ -64,9 +65,19 @@ windowScrollListener() {
   }
 },
 },
+setup(){
+  const router = useRouter();
+  const routerLink=(content)=>{
+  if(content=="沸点")
+  router.push('/boiling');
+};
+return{
+  routerLink
+}
+},
   data() {
     return {
-      contents: [1111, 1111, 1111, 1111, 1111, 1111],
+      contents: ["首页", "沸点", 1111, 1111, 1111, 1111],
       hiddenTop:false,
     };
   },
