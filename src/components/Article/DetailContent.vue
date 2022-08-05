@@ -48,9 +48,8 @@ export default {
         data = data.replace(item, _toc);
       });
       text.value = data;
-
       let arr = toc.map((item) => {
-        let data = item.match(/^<[Hh](\d).*?>.*?>(.*?)</);
+        let data = item.match(/^<[Hh](\d).*?>(.*?)</);
         return { id: data[1], content: data[2] };
       });
       list.$patch({ list: arr });
