@@ -164,9 +164,9 @@ const watchActive = () => {
   let mid = nav.value.clientHeight / 2;
   let offsetTop = itemRefs[activeIndex.value].offsetTop;
   if (offsetTop > mid && isDown) {
-    nav.value.scrollBy(0, 60);
-  } else if (offsetTop < mid * 2 && !isDown) {
-    nav.value.scrollBy(0, -60);
+    nav.value.scrollBy(0, 32);
+  } else if (offsetTop > mid && !isDown) {
+    nav.value.scrollBy(0, -32);
   }
 };
 
