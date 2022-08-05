@@ -7,9 +7,12 @@
         :key="index"
         title="i.content"
         @click="jump(index)"
+        :ref="setItemRef"
         :class="activeIndex === index ? 'active' : ''"
       >
-        <div :style="{ marginLeft: size(i.id) }">{{ i.content }}</div>
+        <div :style="{ marginLeft: size(i.id) }">
+          {{ i.content }}
+        </div>
       </li>
     </ul>
   </div>
@@ -18,20 +21,22 @@
 <script setup>
 const { useListStore } = require("@/store");
 const {
-  watchEffect,
   ref,
   onBeforeMount,
   onUnmounted,
+  onBeforeUpdate,
+  onMounted,
 } = require("@vue/runtime-core");
 const { storeToRefs } = require("pinia");
 const listArr = useListStore();
 const { list } = storeToRefs(listArr);
-
 let activeIndex = ref(0);
+
 //动态计算缩进大小
 const size = (num) => {
   return num * 5 + "px";
 };
+
 //点击目录跳转
 const jump = (index) => {
   activeIndex.value = index;
@@ -42,27 +47,28 @@ const jump = (index) => {
     });
   }
 };
-const hTagHeight = ref([])
+
+const hTagHeight = ref([]);
 //获取h标签距离页面顶部的距离
 const getHtagHeight = () => {
-  let tag = document.querySelectorAll('.jump-site')
-  let arr = []
-  for(let i = 0; i < tag.length; i++){
-    arr.push(tag[i].offsetTop)
+  let tag = document.querySelectorAll(".jump-site");
+  let arr = [];
+  for (let i = 0; i < tag.length; i++) {
+    arr.push(tag[i].offsetTop);
   }
-  hTagHeight.value = arr
-}
+  hTagHeight.value = arr;
+};
 
 let timer;
 let fun;
-let height = ref(0);
+let height = ref(0); //当前滚动高度
 //鼠标滚动获取距离顶部的距离
 const scroll = () => {
   window.addEventListener(
     "scroll",
     (fun = () => {
       if (timer) {
-        clearTimeout(timer);
+        return;
       }
       timer = setTimeout(() => {
         let _scrollTop =
@@ -70,35 +76,105 @@ const scroll = () => {
           window.pageYOffset ||
           document.documentElement.scrollTop;
         height.value = _scrollTop + 100;
-        getHtagHeight()
-        activeScroll()
+        timer = null;
+        getHtagHeight();
+        activeScroll();
+        watchActive();
       }, 500);
     })
   );
 };
-//激活样式跟随页面滚动
-const activeScroll = () => {
-  let arr = hTagHeight.value
-  if(arr[0] > height.value ) return
-  else if(arr[arr.length - 1] < height.value){
-    activeIndex.value = arr.length
+//获取nav中的dom元素
+let itemRefs = [];
+const setItemRef = (el) => {
+  if (el) {
+    itemRefs.push(el);
   }
-  for(let i = 0; i < arr.length - 1;i++){
-    if(arr[i] < height.value && arr[i+1] > height.value ){
-      return activeIndex.value = i
-    }
-  }
-}
+};
 onBeforeMount(() => {
   scroll();
 });
+onMounted(() => {
+  mouseWheel();
+});
+onBeforeUpdate(() => {
+  itemRefs = [];
+});
+//激活样式跟随页面滚动
+const activeScroll = () => {
+  let arr = hTagHeight.value;
+  if (arr[0] > height.value) return;
+  else if (arr[arr.length - 1] < height.value) {
+    activeIndex.value = arr.length;
+  }
+  for (let i = 0; i < arr.length - 1; i++) {
+    if (arr[i] < height.value && arr[i + 1] > height.value) {
+      return (activeIndex.value = i);
+    }
+  }
+};
+
+let isDown = true;
+//判断滚动方向
+const mouseWheel = () => {
+  let scrollFunc = function (e) {
+    e = e || window.event;
+    if (e.wheelDelta) {
+      //判断浏览器IE，谷歌滑轮事件
+      if (e.wheelDelta > 0) {
+        //当滑轮向上滚动时
+        // console.log("滑轮向上滚动");
+        isDown = false;
+      }
+      if (e.wheelDelta < 0) {
+        //当滑轮向下滚动时
+        // console.log("滑轮向下滚动");
+        isDown = true;
+      }
+    } else if (e.detail) {
+      //Firefox滑轮事件
+      if (e.detail > 0) {
+        //当滑轮向上滚动时
+        isDown = false;
+        // console.log("滑轮向上滚动");
+      }
+      if (e.detail < 0) {
+        //当滑轮向下滚动时
+        isDown = false;
+        // console.log("滑轮向下滚动");
+      }
+    }
+  };
+  if (document.addEventListener) {
+    //火狐使用DOMMouseScroll绑定
+    document.addEventListener("DOMMouseScroll", scrollFunc, false);
+  }
+  //其他浏览器直接绑定滚动事件
+  document.addEventListener("mousewheel", scrollFunc);
+};
+
+//监视目录滚动
+const nav = ref(null);
+let flag;
+const watchActive = () => {
+  if (flag === activeIndex.value) {
+    return;
+  }
+  flag = activeIndex.value;
+  let mid = nav.value.clientHeight / 2;
+  let offsetTop = itemRefs[activeIndex.value].offsetTop;
+  if (offsetTop > mid && isDown) {
+    nav.value.scrollBy(0, 60);
+  } else if (offsetTop < mid * 2 && !isDown) {
+    nav.value.scrollBy(0, -60);
+  }
+};
+
 onUnmounted(() => {
   window.removeEventListener("scroll", fun);
+  window.removeEventListener("mousewheel", scrollFunc);
+  window.removeEventListener("DOMMouseScroll", scrollFunc);
 });
-watchEffect(() => {
-});
-
-//
 </script>
 
 <style lang="scss" scoped>
@@ -124,7 +200,7 @@ a {
   }
   ::v-deep .nav {
     height: 500px;
-    overflow: scroll;
+    overflow: auto;
     padding: 0;
     font-size: 12px;
     li {
