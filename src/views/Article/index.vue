@@ -1,8 +1,9 @@
 <template>
   <div>
+    <Header></Header>
     <comment-out-page>
       <template #main>
-        <div class="container">
+        <div class="container1">
           <detail-content></detail-content>
           <el-divider></el-divider>
         </div>
@@ -18,13 +19,14 @@
 </template>
 
 <script setup>
+import Header from "@/components/header/Header.vue";
 import CommentOutPage from "@/components/outPage/CommentOutPage.vue";
 import DetailContent from "@/components/Article/DetailContent.vue";
 import CommentSidebar from "@/components/side/CommentSidebar.vue";
 import DirectoryNav from "@/components/Article/directoryNav";
 </script>
 <style lang="scss" scoped>
-.container {
+.container1 {
   padding: 24px;
 }
 </style>
