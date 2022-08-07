@@ -37,7 +37,7 @@ export default {
     
     
     document.addEventListener("scroll", () => {
-      if(!this.$refs.List)return;//防止元素未加载完成触发
+      if(!this?.$refs?.List?.at(-1)?.$el)return;//防止元素未加载完成触发
       const List = this.$refs.List.at(-1).$el;
       if (List.getBoundingClientRect().bottom - document.documentElement.clientHeight <= 0) {
         
