@@ -105,7 +105,7 @@ const activeScroll = () => {
   let arr = hTagHeight.value;
   if (arr[0] > height.value) return;
   else if (arr[arr.length - 1] < height.value) {
-    activeIndex.value = arr.length;
+    activeIndex.value = arr.length -1;
   }
   for (let i = 0; i < arr.length - 1; i++) {
     if (arr[i] < height.value && arr[i + 1] > height.value) {
@@ -116,8 +116,7 @@ const activeScroll = () => {
 
 let isDown = true;
 //判断滚动方向
-const mouseWheel = () => {
-  let scrollFunc = function (e) {
+ let scrollFunc = function (e) {
     e = e || window.event;
     if (e.wheelDelta) {
       //判断浏览器IE，谷歌滑轮事件
@@ -145,6 +144,7 @@ const mouseWheel = () => {
       }
     }
   };
+const mouseWheel = () => {
   if (document.addEventListener) {
     //火狐使用DOMMouseScroll绑定
     document.addEventListener("DOMMouseScroll", scrollFunc, false);
@@ -155,19 +155,21 @@ const mouseWheel = () => {
 
 //监视目录滚动
 const nav = ref(null);
-let flag;
+let oldValue;
 const watchActive = () => {
-  if (flag === activeIndex.value) {
+  if (oldValue === activeIndex.value) {
     return;
   }
-  flag = activeIndex.value;
-  let mid = nav.value.clientHeight / 2;
-  let offsetTop = itemRefs[activeIndex.value].offsetTop;
+  let difference = activeIndex.value - oldValue //差值
+  let mid = nav.value.clientHeight / 2;  //滚动元素父元素的高度的一半
+  let offsetTop = itemRefs[activeIndex.value].offsetTop; //当前激活元素相对于父元素顶部的距离
+
   if (offsetTop > mid && isDown) {
-    nav.value.scrollBy(0, 60);
-  } else if (offsetTop < mid * 2 && !isDown) {
-    nav.value.scrollBy(0, -60);
+    nav.value.scrollBy(0, 32 * difference);
+  } else if (offsetTop > mid && !isDown) {
+    nav.value.scrollBy(0, 32 * difference);
   }
+  oldValue = activeIndex.value;
 };
 
 onUnmounted(() => {
@@ -184,7 +186,7 @@ a {
 }
 .directory {
   position: sticky;
-  top: 0;
+  top: 230px;
   left: 0;
   margin: 0;
   padding: 0;

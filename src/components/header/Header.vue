@@ -33,7 +33,7 @@
         />
       </div>
     </div>
-    <div>
+    <div v-show="show">
       <div class="divide"></div>
       <NavList></NavList>
     </div>
@@ -51,23 +51,40 @@ export default {
     Search,
     NavList,
   },
-created() {
+  created() {
    window.addEventListener('scroll', this.windowScrollListener);//绑定监听事件
+    if (this.$route.name==='home')
+    {
+        this.show = true
+    }
 },
+watch: {
+      // 如果路由有变化，会再次执行该方法
+      "$route": "fetchDate"
+    },
 methods:{
-windowScrollListener() {
+   windowScrollListener() {//滚动条离顶部距离大于400隐藏,小于400或者上拉显示
   var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
-  if (scrollTop >= 300) {
+  let scrollStep = scrollTop - this.oldScrollTop;
+  this.oldScrollTop = scrollTop;
+  if (scrollTop >= 400) {
     this.hiddenTop = true;
   }
-  if (scrollTop < 300) {
+  if (scrollTop < 400||scrollStep<0) {
     this.hiddenTop = false;
   }
-},
+ },
+   fetchDate(){//判断是否在指定路由中
+        if (this.$route.name!=='home'){
+          this.show = false
+        }else {
+          this.show = true
+        }
+      }
 },
 setup(){
   const router = useRouter();
-  const routerLink=(content)=>{
+  const routerLink=(content)=>{//路由跳转
   if(content=="沸点")
   router.push('/boiling');
 };
@@ -78,7 +95,9 @@ return{
   data() {
     return {
       contents: ["首页", "沸点", 1111, 1111, 1111, 1111],
+      oldScrollTop: 0,
       hiddenTop:false,
+      show: false
     };
   },
 };
