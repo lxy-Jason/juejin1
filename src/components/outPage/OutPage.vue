@@ -17,7 +17,6 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  position: relative;
   .main-inside {
     margin-top: 16px;
     width: 960px;

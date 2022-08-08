@@ -8,6 +8,7 @@
       <HomeSidebar />
     </template>
   </out-page>
+  <Suspension></Suspension>
 </template>
 
 <script setup>
@@ -17,6 +18,7 @@ import OutPage from "@/components/outPage/OutPage.vue";
 import Lists from "@/views/Home/component/Lists.vue";
 import NavList from "@/components/header/NavList.vue";
 import HomeSidebar from "@/components/side/HomeSidebar.vue";
+import Suspension from "@/components/Suspension.vue";
 </script>
 <style lang="scss" scoped>
 .list-content {
