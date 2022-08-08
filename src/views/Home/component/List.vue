@@ -111,6 +111,9 @@ export default {
 <style lang="scss" scoped>
 .list {
   position: relative;
+  &:hover {
+    background-color:#fafafa;
+  }
   .picture {
     height: 70px;
     width: 70px;
