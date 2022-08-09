@@ -58,16 +58,16 @@ export default {
 
     const ListIconData = ref([
       {
-        icon: require("@/assets/view.png"),
+        icon: require("@/assets/view0.png"),
         value:data.watch,
         mouseLeave:(e,item)=>{},
         mouseEnter:(e,item)=>{},
         clickHandle:(e,item)=>{}
       },
       {
-        icon: require("@/assets/点赞.png"),
-        iconEnter:require("@/assets/点赞 (1).png"),
-        iconleave:require("@/assets/点赞.png"),
+        icon: require("@/assets/praise0.png"),
+        iconEnter:require("@/assets/praise1.png"),
+        iconleave:require("@/assets/praise0.png"),
         value:data.like,
         click:false,
         mouseLeave:(e,item)=>{
@@ -87,9 +87,9 @@ export default {
         }
       },
       {
-        icon: require("@/assets/评论.png"),
-        iconEnter:require("@/assets/评论 (1).png"),
-        iconleave:require("@/assets/评论.png"),
+        icon: require("@/assets/chat0.png"),
+        iconEnter:require("@/assets/chat1.png"),
+        iconleave:require("@/assets/chat0.png"),
         value:data.comment,
         mouseLeave:(e,item)=>{
           item.icon = item.iconleave
@@ -147,9 +147,13 @@ export default {
 
     .List-icons {
       margin-top: 5px;
+      :first-child{
+        pointer-events: none;
+      }
       button {
         border: none;
         padding: 0;
+        background-color: rgba(0,0,0,0);
         img {
           padding: 0 5px;
           width: 15px;
