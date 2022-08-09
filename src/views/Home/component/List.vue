@@ -152,7 +152,7 @@ export default {
         padding: 0;
         img {
           padding: 0 5px;
-          width: 25px;
+          width: 15px;
           object-fit: cover;
         }
       }
