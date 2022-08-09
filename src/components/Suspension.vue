@@ -1,6 +1,6 @@
 <template>
   <div class="suspension">
-    <div class="toTop" title="回到顶部">
+    <div v-if="curHeight > 800" @click="toTop" title="回到顶部">
       <svg
         data-v-574aa814=""
         width="16"
@@ -42,6 +42,23 @@
 </template>
 
 <script setup>
+const { onMounted, reactive, watchEffect, ref, onUnmounted }=require("@vue/runtime-core");
+const {windowScroll} = require('@/utils/windowScroll') 
+let curHeight = ref(0)
+let resFun
+
+onMounted(() => {
+  resFun =  windowScroll(curHeight)
+})
+
+watchEffect(() => {
+})
+onUnmounted(() => {
+  window.removeEventListener('scroll',resFun)
+})
+const toTop = (e) => {
+  window.scrollTo({ top: 0 });
+};
 </script>
 
 <style lang="scss" scoped>
