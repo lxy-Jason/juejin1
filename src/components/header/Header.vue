@@ -15,7 +15,8 @@
         </div>
 
         <div class="button">
-          <el-button type="primary">创作者中心</el-button>
+        <DropDown>
+        </DropDown>
         </div>
       </div>
 
@@ -42,6 +43,7 @@
 
 <script>
 import NavList from "@/components/header/NavList.vue";
+import DropDown from "@/components/header/DropDown.vue"
 //还是先用着吧，有ui错误，目前思路是切换页面再隐蔽navlist
 import { Search } from "@element-plus/icons";
 import {created,methods} from "vue"
@@ -50,6 +52,7 @@ export default {
   components: {
     Search,
     NavList,
+    DropDown,
   },
   created() {
    window.addEventListener('scroll', this.windowScrollListener);//绑定监听事件
@@ -116,7 +119,7 @@ return{
   background: white;
   position: sticky;
   top: 0px;
-  z-index: 9999;
+  z-index: 99;
   box-shadow: 0px 0px 5px rgb(228, 227, 227);
   .container-header {
     max-width: 1200px;
@@ -154,6 +157,9 @@ return{
 
     .button {
       margin-left: 20px;
+      margin-top:15px;
+      position:sticky;
+      z-index:999;
     }
 
     :deep(.el-button--small) {
