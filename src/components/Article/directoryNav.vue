@@ -67,6 +67,7 @@ const scroll = () => {
   window.addEventListener(
     "scroll",
     (fun = () => {
+      
       if (timer) {
         return;
       }
