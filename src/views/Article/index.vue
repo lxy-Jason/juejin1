@@ -12,6 +12,7 @@
         <comment-sidebar></comment-sidebar>
       </template>
       <template #sidebar>
+        <ArticlelSidebar></ArticlelSidebar>
         <directory-nav></directory-nav>
       </template>
     </comment-out-page>
@@ -24,6 +25,7 @@ import CommentOutPage from "@/components/outPage/CommentOutPage.vue";
 import DetailContent from "@/components/Article/DetailContent.vue";
 import CommentSidebar from "@/components/side/CommentSidebar.vue";
 import DirectoryNav from "@/components/Article/directoryNav";
+import ArticlelSidebar from "@/components/side/ArticlelSidebar.vue";
 </script>
 <style lang="scss" scoped>
 .container1 {
