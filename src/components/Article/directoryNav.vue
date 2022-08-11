@@ -67,6 +67,7 @@ const scroll = () => {
   window.addEventListener(
     "scroll",
     (fun = () => {
+      
       if (timer) {
         return;
       }
@@ -186,8 +187,7 @@ a {
 }
 .directory {
   position: sticky;
-  top: 230px;
-  left: 0;
+  top: 80px;
   margin: 0;
   padding: 0;
   box-sizing: border-box;

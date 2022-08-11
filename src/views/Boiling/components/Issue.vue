@@ -55,7 +55,7 @@ import uploadList from "./UploadList.vue";
 import LinkPop from "./LinkPop.vue"
 import TopicPop from "./TopicPop.vue"
 import {ref,reactive, computed} from "vue";
-const textValue=ref("");
+const textValue=ref("#新人报道#");
 const dom = ref();
 const fileList = ref([]);
 const eventDelegation = () => {

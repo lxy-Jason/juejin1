@@ -19,6 +19,7 @@ export default {
         
       ],
       page:1,
+      lock:false,
     };
   },
   mounted(){
@@ -35,12 +36,14 @@ export default {
           this.page ++;
         })()
     
+        
     
     document.addEventListener("scroll", () => {
+      if(this.lock)return;
+      this.lock = true;
       if(!this?.$refs?.List?.at(-1)?.$el)return;//防止元素未加载完成触发
       const List = this.$refs.List.at(-1).$el;
-      if (List.getBoundingClientRect().bottom - document.documentElement.clientHeight <= 0) {
-        
+      if (List.getBoundingClientRect().bottom - document.documentElement.clientHeight <= 50) {
         (async () => {
 
           const request = await fetch(`http://182.61.29.159:3334/article/findAll?page=${this.page}&pageSize=5`)
@@ -51,7 +54,10 @@ export default {
             console.log(request.status);
           }
           this.page ++;
+          this.lock = false;
         })()
+      }else{
+        this.lock = false;
       }
     });
   },
