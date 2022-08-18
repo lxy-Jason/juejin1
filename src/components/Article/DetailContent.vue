@@ -15,7 +15,8 @@
     <p></p>
     <div class="box">
       <div id="content" class="box-content">
-        <v-md-preview :text="text"></v-md-preview>
+        <!-- <v-md-preview :text="text"></v-md-preview> -->
+        <v-md-preview-html :html="text" preview-class="github-markdown-body"></v-md-preview-html>
       </div>
     </div>
     <p></p>
