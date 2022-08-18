@@ -15,6 +15,16 @@ const routes = [
     path: '/boiling',
     name: 'boiling',
     component: () => import('@/views/Boiling/index.vue'),
+  },
+  {
+    path: '/markdown',
+    name: 'markdown',
+    component: () => import('@/views/MarkDown/index.vue'),
+  },
+  {
+    path: '/code',
+    name: 'code',
+    component: () => import('@/views/Code/index.vue'),
   }
 ]
 
