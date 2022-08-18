@@ -2,14 +2,8 @@
   <div class="directory">
     <div class="title">目录</div>
     <ul ref="nav" class="nav">
-      <li
-        v-for="(i, index) in list"
-        :key="index"
-        title="i.content"
-        @click="jump(index)"
-        :ref="setItemRef"
-        :class="activeIndex === index ? 'active' : ''"
-      >
+      <li v-for="(i, index) in list" :key="index" :title="i.content" @click="jump(index)" :ref="setItemRef"
+        :class="activeIndex === index ? 'active' : ''">
         <div :style="{ marginLeft: size(i.id) }">
           {{ i.content }}
         </div>
@@ -34,10 +28,11 @@ let activeIndex = ref(0);
 
 //动态计算缩进大小
 const size = (num) => {
-  return num * 5 + "px";
+  return num * 10 + "px";
 };
 
 //点击目录跳转
+let isJump = false
 const jump = (index) => {
   activeIndex.value = index;
   let target = document.getElementById(index).offsetTop;
@@ -45,6 +40,7 @@ const jump = (index) => {
     window.scrollTo({
       top: target - 80,
     });
+    isJump = true
   }
 };
 
@@ -67,7 +63,7 @@ const scroll = () => {
   window.addEventListener(
     "scroll",
     (fun = () => {
-      
+
       if (timer) {
         return;
       }
@@ -106,7 +102,7 @@ const activeScroll = () => {
   let arr = hTagHeight.value;
   if (arr[0] > height.value) return;
   else if (arr[arr.length - 1] < height.value) {
-    activeIndex.value = arr.length -1;
+    activeIndex.value = arr.length - 1;
   }
   for (let i = 0; i < arr.length - 1; i++) {
     if (arr[i] < height.value && arr[i + 1] > height.value) {
@@ -117,34 +113,34 @@ const activeScroll = () => {
 
 let isDown = true;
 //判断滚动方向
- let scrollFunc = function (e) {
-    e = e || window.event;
-    if (e.wheelDelta) {
-      //判断浏览器IE，谷歌滑轮事件
-      if (e.wheelDelta > 0) {
-        //当滑轮向上滚动时
-        // console.log("滑轮向上滚动");
-        isDown = false;
-      }
-      if (e.wheelDelta < 0) {
-        //当滑轮向下滚动时
-        // console.log("滑轮向下滚动");
-        isDown = true;
-      }
-    } else if (e.detail) {
-      //Firefox滑轮事件
-      if (e.detail > 0) {
-        //当滑轮向上滚动时
-        isDown = false;
-        // console.log("滑轮向上滚动");
-      }
-      if (e.detail < 0) {
-        //当滑轮向下滚动时
-        isDown = false;
-        // console.log("滑轮向下滚动");
-      }
+let scrollFunc = function (e) {
+  e = e || window.event;
+  if (e.wheelDelta) {
+    //判断浏览器IE，谷歌滑轮事件
+    if (e.wheelDelta > 0) {
+      //当滑轮向上滚动时
+      // console.log("滑轮向上滚动");
+      isDown = false;
     }
-  };
+    if (e.wheelDelta < 0) {
+      //当滑轮向下滚动时
+      // console.log("滑轮向下滚动");
+      isDown = true;
+    }
+  } else if (e.detail) {
+    //Firefox滑轮事件
+    if (e.detail > 0) {
+      //当滑轮向上滚动时
+      isDown = false;
+      // console.log("滑轮向上滚动");
+    }
+    if (e.detail < 0) {
+      //当滑轮向下滚动时
+      isDown = false;
+      // console.log("滑轮向下滚动");
+    }
+  }
+};
 const mouseWheel = () => {
   if (document.addEventListener) {
     //火狐使用DOMMouseScroll绑定
@@ -156,7 +152,7 @@ const mouseWheel = () => {
 
 //监视目录滚动
 const nav = ref(null);
-let oldValue;
+let oldValue = 10;
 const watchActive = () => {
   if (oldValue === activeIndex.value) {
     return;
@@ -164,13 +160,23 @@ const watchActive = () => {
   let difference = activeIndex.value - oldValue //差值
   let mid = nav.value.clientHeight / 2;  //滚动元素父元素的高度的一半
   let offsetTop = itemRefs[activeIndex.value].offsetTop; //当前激活元素相对于父元素顶部的距离
-
+  console.log(activeIndex.value);
+  oldValue = activeIndex.value;
+  if(isJump){
+    isJump = false
+    return 
+  }
   if (offsetTop > mid && isDown) {
     nav.value.scrollBy(0, 32 * difference);
   } else if (offsetTop > mid && !isDown) {
     nav.value.scrollBy(0, 32 * difference);
   }
-  oldValue = activeIndex.value;
+  if (activeIndex.value === 1) {
+    console.log('1122');
+    nav.value.scrollTo({
+      top: 0
+    })
+  }
 };
 
 onUnmounted(() => {
@@ -185,6 +191,7 @@ a {
   text-decoration: none;
   color: black;
 }
+
 .directory {
   position: sticky;
   top: 80px;
@@ -200,29 +207,35 @@ a {
     padding: 8px;
     margin: 8px;
   }
+
   ::v-deep .nav {
     height: 500px;
     overflow: auto;
     padding: 0;
     font-size: 12px;
+
     li {
       position: relative;
       list-style: none;
       padding: 8px;
       cursor: pointer;
       overflow: hidden;
+
       div {
         height: 100%;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
       }
+
       &:hover {
         background: #f7f8fa;
       }
     }
+
     .active {
       color: #007fff;
+
       & ::before {
         content: "";
         position: absolute;
