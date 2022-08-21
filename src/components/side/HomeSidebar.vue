@@ -16,7 +16,7 @@
         </el-row>
 
     </el-card>
-
+<div class="affix">
     <div class="col">
         <div class="row-3 img-field">
             <img class="img-fluid" src="@/assets/广告1.png" alt="">
@@ -25,9 +25,7 @@
             <img class="img-fluid" src="@/assets/广告2.png" alt="">
         </div>
     </div>
-
     <el-card>
-
         <el-row>
             <el-col :span="6">
                 <img class="QR-code" src="@/assets/下载二维码.png" alt="">
@@ -37,9 +35,8 @@
                 <div class="download2"> 一个帮助开发者成长的社区</div>
             </el-col>
         </el-row>
-
     </el-card>
-
+</div>
     <el-card class="box-card">
         <template #header>
             <div class="card-header">
@@ -157,7 +154,32 @@ export default {
         return {
             authors,
         }
+    },
+    mounted() {
+    window.addEventListener("scroll", this.handleScroll);
+  },
+  methods: {
+    handleScroll() {
+      let scrollY = window.pageYOffset ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop;
+      let scrollObj = document.querySelector(".affix");
+      //scrollObj 这个是下图右边答题卡的div
+      if (scrollY > 1300) {
+      //这个358就是上面的距离
+        scrollObj.style.position = "sticky";
+        scrollObj.style.top="120px";
+      } else {
+        scrollObj.style.position = "static";
+        scrollObj.style.marginTop = "0";
+      }
     }
+  },
+  destroyed() {
+  //销毁监听
+    window.removeEventListener("scroll", this.handleScroll);
+  },
+
 
 }
 

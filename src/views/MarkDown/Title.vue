@@ -72,7 +72,7 @@ export default{
         border:none;
         resize: none;
         outline:none;
-        width:70%;
+        width:65%;
         font-size:30px;
         height:60px;
         line-height:60px;
@@ -80,7 +80,7 @@ export default{
         font-family: Arial, Helvetica, sans-serif;
     }
     .right-gird{
-        width:25%;
+        width:35%;
         flex: 1;
         text-align: right;
         margin-right:30px;
@@ -94,14 +94,14 @@ export default{
             opacity:0.5;
         }
         .avatar {
-                position:relative;
-                width: 30px;
-                height: 30px;
-                object-fit: cover;
-                border-radius: 50%;
-                margin-left: 15px;
-                top:9px;
-                }
+            position:relative;
+            width: 30px;
+            height: 30px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-left: 15px;
+            top:9px;
+            }
         
     }
   }

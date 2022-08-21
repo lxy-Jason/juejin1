@@ -56,7 +56,7 @@ export default {
   },
   created() {
    window.addEventListener('scroll', this.windowScrollListener);//绑定监听事件
-    if (this.$route.name==='home')
+    if (this.$route.name==='home'||this.$route.name==='course')
     {
         this.show = true
     }
@@ -78,7 +78,7 @@ methods:{
   }
  },
    fetchDate(){//判断是否在指定路由中
-        if (this.$route.name!=='home'){
+        if (this.$route.name!=='home'||this.$route.name!=='course'){
           this.show = false
         }else {
           this.show = true
@@ -88,16 +88,20 @@ methods:{
 setup(){
   const router = useRouter();
   const routerLink=(content)=>{//路由跳转
+  if(content=="首页")
+  router.push('/');
   if(content=="沸点")
   router.push('/boiling');
-};
+  if(content=="课程")
+  router.push('/course');
+  };
 return{
   routerLink
 }
 },
   data() {
     return {
-      contents: ["首页", "沸点", 1111, 1111, 1111, 1111],
+      contents: ["首页", "沸点", "课程", 1111, 1111, 1111],
       oldScrollTop: 0,
       hiddenTop:false,
       show: false
