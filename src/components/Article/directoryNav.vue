@@ -100,7 +100,7 @@ onBeforeUpdate(() => {
 //激活样式跟随页面滚动
 const activeScroll = () => {
   let arr = hTagHeight.value;
-  if (arr[0] > height.value) return;
+  if (arr[0] > height.value) return (activeIndex.value = 0);
   else if (arr[arr.length - 1] < height.value) {
     activeIndex.value = arr.length - 1;
   }
@@ -152,7 +152,7 @@ const mouseWheel = () => {
 
 //监视目录滚动
 const nav = ref(null);
-let oldValue = 10;
+let oldValue = 0;
 const watchActive = () => {
   if (oldValue === activeIndex.value) {
     return;
@@ -160,19 +160,19 @@ const watchActive = () => {
   let difference = activeIndex.value - oldValue //差值
   let mid = nav.value.clientHeight / 2;  //滚动元素父元素的高度的一半
   let offsetTop = itemRefs[activeIndex.value].offsetTop; //当前激活元素相对于父元素顶部的距离
-  console.log(activeIndex.value);
   oldValue = activeIndex.value;
-  if(isJump){
+  if (isJump) {
     isJump = false
-    return 
+    return
   }
-  if (offsetTop > mid && isDown) {
-    nav.value.scrollBy(0, 32 * difference);
-  } else if (offsetTop > mid && !isDown) {
-    nav.value.scrollBy(0, 32 * difference);
+  if (offsetTop > itemRefs[itemRefs.length - 1].offsetTop - mid && !isDown) {
+
   }
-  if (activeIndex.value === 1) {
-    console.log('1122');
+  else if (offsetTop > mid ) {
+    nav.value.scrollBy(0, 31 * difference);
+  }
+
+  if (activeIndex.value === 0) {
     nav.value.scrollTo({
       top: 0
     })

@@ -28,7 +28,6 @@ export default {
           const request = await fetch(`http://182.61.29.159:3334/article/findAll?page=${this.page}&pageSize=10`)
           if(request.ok){
             let {data} =await request.json();
-            console.log(this.ListDatas)
             this.ListDatas = data;
           }else{
             console.log(request.status);
