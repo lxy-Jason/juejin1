@@ -54,6 +54,8 @@ onMounted(() => {
 watchEffect(() => {
 })
 onUnmounted(() => {
+  console.log(resFun);
+  console.log(111);
   window.removeEventListener('scroll',resFun)
 })
 const toTop = (e) => {
