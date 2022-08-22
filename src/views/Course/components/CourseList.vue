@@ -35,11 +35,11 @@ const list=reactive([
         amount:'114.514',
         userName:'昵称',
         level:6,
-        tag:['java技术专家'],
+        tag:['职位'],
         chapters:16,
         purchaser:706,
-        cover:'https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/48cd5f8442424b8e83fd8c063e289fa9~tplv-k3u1fbpfcp-watermark.image?',
-        avatar:'https://p3-passport.byteacctimg.com/img/user-avatar/df11c2fd1ef2ccdb80a1b0e46c232dc8~300x300.image',
+        cover:'https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/defebdbade3e4130a15420f9640c8952~tplv-k3u1fbpfcp-no-mark:280:280:200:280.awebp?',
+        avatar:'https://p3-passport.byteacctimg.com/img/user-avatar/f88c816bfa2601135af1e1c49189f39c~300x300.image',
     },
 ])
 </script>
