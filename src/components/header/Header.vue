@@ -105,7 +105,7 @@ return{
 },
   data() {
     return {
-      contents: ["首页", "沸点", "课程", 1111, 1111, 1111],
+      contents: ["首页", "沸点", "课程","直播","活动","商城","APP","插件"],
       oldScrollTop: 0,
       hiddenTop:false,
       show: false
