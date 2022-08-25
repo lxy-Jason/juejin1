@@ -1,7 +1,7 @@
 <template>
   <div class="container" :class="[hiddenTop ? 'hiddenTop' : 'showTop']">
     <div class="container-header">
-      <div class="left-grid">
+      <div class="left-grid" @click="getData">
         <i class="fa fa-mars iconmargin" style="color: #333"></i>南通掘金
       </div>
 
@@ -95,13 +95,17 @@ setup(){
   if(content=="课程")
   router.push('/course');
   };
+  const getData=()=>{
+    router.push("/");
+  };
 return{
-  routerLink
+  routerLink,
+  getData
 }
 },
   data() {
     return {
-      contents: ["首页", "沸点", "课程", 1111, 1111, 1111],
+      contents: ["首页", "沸点", "课程","直播","活动","商城","APP","插件"],
       oldScrollTop: 0,
       hiddenTop:false,
       show: false
@@ -136,7 +140,7 @@ return{
   .left-grid {
     font-size: 20px;
     font-family: FZShuTi;
-
+    cursor:pointer;
     .iconmargin {
       margin-right: 5px;
     }

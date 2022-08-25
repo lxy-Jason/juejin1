@@ -164,9 +164,7 @@ export default {
         document.documentElement.scrollTop ||
         document.body.scrollTop;
       let scrollObj = document.querySelector(".affix");
-      //scrollObj 这个是下图右边答题卡的div
       if (scrollY > 1300) {
-      //这个358就是上面的距离
         scrollObj.style.position = "sticky";
         scrollObj.style.top="120px";
       } else {
